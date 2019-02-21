@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Tweets"
+    <item android:id="@+id/menu_tweets"
+        android:title="Tweets"
         android:icon="@drawable/lista"/>
-    <item android:title="Busca"
+    <item android:id="@+id/menu_busca"
+        android:title="Busca"
         android:icon="@drawable/busca"/>
-    <item android:title="Mapa"
+    <item android:id="@+id/menu_mapa"
+        android:title="Mapa"
         android:icon="@drawable/mapa"/>
 </menu>
