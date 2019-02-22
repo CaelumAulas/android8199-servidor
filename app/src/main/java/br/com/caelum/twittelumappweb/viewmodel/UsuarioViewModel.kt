@@ -15,5 +15,6 @@ class UsuarioViewModel(private val usuarioRepository: UsuarioRepository) : ViewM
     }
 
     fun usuarioEstaLogado() = usuarioRepository.usuarioEstaLogado
+    fun usuarioDaSessao() = usuarioRepository.usuarioDaSessao
 
 }

@@ -1,5 +1,6 @@
 package br.com.caelum.twittelumappweb.fragment
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -39,7 +40,7 @@ class BuscaTweetFragment : Fragment() {
         busca.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(texto: String?): Boolean {
                 if (!texto.isNullOrEmpty()) {
-                    val tweets = viewModel.tweets()
+                    val tweets = viewModel.tweets().value!!
 
 
                     val tweetsFiltrados = tweets.filter { tweet -> tweet.mensagem.contains(texto!!) }

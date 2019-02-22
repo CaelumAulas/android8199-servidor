@@ -2,6 +2,7 @@ package br.com.caelum.twittelumappweb.webservice
 
 import android.util.Log
 import br.com.caelum.twittelumappweb.modelo.Usuario
+import br.com.caelum.twittelumappweb.webservice.InicializadorDeRetrofit.retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,11 +12,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-class UsuarioWebClient {
-    val retrofit = Retrofit.Builder()
-            .baseUrl("https://68cd4822.ngrok.io")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+class UsuarioWebClient(retrofit: Retrofit) {
 
     private val service = retrofit.create(UsuarioService::class.java)
 

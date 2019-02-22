@@ -8,6 +8,7 @@ import br.com.caelum.twittelumappweb.webservice.UsuarioWebClient
 
 class UsuarioRepository(private val webClient: UsuarioWebClient) {
     val usuarioEstaLogado: MutableLiveData<Boolean> = MutableLiveData()
+    val usuarioDaSessao: MutableLiveData<Usuario> = MutableLiveData()
 
     fun registra(usuario: Usuario) {
         webClient.registra(usuario, sucesso())
@@ -21,5 +22,6 @@ class UsuarioRepository(private val webClient: UsuarioWebClient) {
 
     private fun sucesso() = { usuario: Usuario ->
         usuarioEstaLogado.value = true
+        usuarioDaSessao.value = usuario
     }
 }
