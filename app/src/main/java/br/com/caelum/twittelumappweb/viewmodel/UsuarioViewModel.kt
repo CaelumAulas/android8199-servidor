@@ -5,6 +5,7 @@ import br.com.caelum.twittelumappweb.data.UsuarioRepository
 import br.com.caelum.twittelumappweb.modelo.Usuario
 
 class UsuarioViewModel(private val usuarioRepository: UsuarioRepository) : ViewModel() {
+
     fun cria(usuario: Usuario) {
         usuarioRepository.registra(usuario)
     }
@@ -12,5 +13,7 @@ class UsuarioViewModel(private val usuarioRepository: UsuarioRepository) : ViewM
     fun loga(usuario: Usuario) {
         usuarioRepository.fazLogin(usuario)
     }
+
+    fun usuarioEstaLogado() = usuarioRepository.usuarioEstaLogado
 
 }
