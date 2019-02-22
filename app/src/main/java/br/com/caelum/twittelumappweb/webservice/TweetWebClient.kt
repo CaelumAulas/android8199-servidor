@@ -21,7 +21,7 @@ class TweetWebClient(retrofit: Retrofit) {
 
             }
             override fun onResponse(call: Call<Tweet>, response: Response<Tweet>) {
-                Log.i("TWEET", "${tweet} foi salvo")
+                Log.i("TWEET", "${tweet.dono} foi salvo")
             }
         })
     }

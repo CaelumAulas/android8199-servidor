@@ -8,7 +8,7 @@ import br.com.caelum.twittelumappweb.webservice.InicializadorDeRetrofit
 import br.com.caelum.twittelumappweb.webservice.TweetWebClient
 import br.com.caelum.twittelumappweb.webservice.UsuarioWebClient
 
-object ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+object ViewModelFactory : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T  {
