@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import br.com.caelum.twittelumappweb.R
 import br.com.caelum.twittelumappweb.fragment.BuscaTweetFragment
 import br.com.caelum.twittelumappweb.fragment.ListaTweetsFragment
+import br.com.caelum.twittelumappweb.fragment.MapaFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_busca -> {
                     exibe(BuscaTweetFragment())
+                    true
+                }
+                R.id.menu_mapa -> {
+                    exibe(MapaFragment())
                     true
                 }
                 else ->  true
