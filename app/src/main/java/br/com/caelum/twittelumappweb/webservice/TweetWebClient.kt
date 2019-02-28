@@ -14,14 +14,19 @@ import retrofit2.http.POST
 class TweetWebClient(retrofit: Retrofit) {
     private val service = retrofit.create(TweetService::class.java)
 
-    fun salva(tweet: Tweet) {
+    fun salva(tweet: Tweet,
+              reqFoiSucesso: (Tweet) -> Unit) {
         service.salva(tweet).enqueue(object : Callback<Tweet> {
             override fun onFailure(call: Call<Tweet>, t: Throwable) {
                 Log.i("TWEET", "erro: "+t.message)
 
             }
             override fun onResponse(call: Call<Tweet>, response: Response<Tweet>) {
-                Log.i("TWEET", "${tweet.dono} foi salvo")
+                if (response.isSuccessful) {
+                    response.body()?.let { tweetDoServidor ->
+                        reqFoiSucesso(tweetDoServidor)
+                    }
+                }
             }
         })
     }
