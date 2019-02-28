@@ -11,5 +11,5 @@ class TweetViewModel(private val repository: TweetRepository) : ViewModel() {
 
     fun tweets() = repository.lista()
 
-
+    fun carregaLista() = repository.carregaLista()
 }

@@ -34,7 +34,7 @@ class ListaTweetsFragment : Fragment() {
 
 
         view.swipe.setOnRefreshListener {
-            viewModel.tweets()
+            viewModel.carregaLista()
         }
 
         view.swipe.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED)
