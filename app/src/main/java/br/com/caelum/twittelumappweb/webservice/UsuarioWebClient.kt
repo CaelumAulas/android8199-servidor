@@ -24,8 +24,10 @@ class UsuarioWebClient(retrofit: Retrofit) {
             }
 
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                response.body()?.let {
-                    reqFoiSucesso(usuario)
+                if (response.isSuccessful) {
+                    response.body()?.let { usuarioDoServidor ->
+                        reqFoiSucesso(usuarioDoServidor)
+                    }
                 }
             }
 
@@ -40,8 +42,10 @@ class UsuarioWebClient(retrofit: Retrofit) {
             }
 
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                response.body()?.let {
-                    reqFoiSucesso(usuario)
+                if (response.isSuccessful) {
+                    response.body()?.let { usuarioDoServidor ->
+                        reqFoiSucesso(usuarioDoServidor)
+                    }
                 }
             }
 
