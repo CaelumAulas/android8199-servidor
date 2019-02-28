@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TweetActivity::class.java)
             startActivity(intent)
         }
+
+        bottom_navigation.selectedItemId = R.id.menu_tweets
     }
 
     private fun listenerBottomNavigation() {
