@@ -1,8 +1,10 @@
 package br.com.caelum.twittelumappweb.activity
 
+import android.Manifest
 import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -15,6 +17,7 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import br.com.caelum.twittelumappweb.GPS
 import br.com.caelum.twittelumappweb.R
 import br.com.caelum.twittelumappweb.decodificaParaBase64
 import br.com.caelum.twittelumappweb.modelo.Tweet
@@ -33,17 +36,42 @@ class TweetActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TweetViewModel
     private var localFoto: String? = null
+    private lateinit var gps: GPS
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tweet)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         viewModel = ViewModelProviders.of(this, ViewModelFactory).get(TweetViewModel::class.java)
-
+        requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 123)
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == 123) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                gps = GPS(this)
+                gps.fazBusca()
+            }
+        }
+    }
+
+
+    fun criaTweet(): Tweet {
+
+        val campoDeMensagemDoTweet = findViewById<EditText>(R.id.tweet_mensagem)
+        val mensagemDoTweet: String = campoDeMensagemDoTweet.text.toString()
+        val foto: String? = tweet_foto.tag as String?
+        val dono = usuarioViewModel.usuarioDaSessao().value!!
+        val (latitude, longitude) = gps.getCoordenadasAtuais()
+
+
+        return Tweet(mensagemDoTweet, foto, dono, latitude, longitude)
+    }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -99,18 +127,6 @@ class TweetActivity : AppCompatActivity() {
         viewModel.salva(tweet)
 
         Toast.makeText(this, "$tweet foi salvo com sucesso :D", Toast.LENGTH_LONG).show()
-    }
-
-    fun criaTweet(): Tweet {
-
-        val campoDeMensagemDoTweet = findViewById<EditText>(R.id.tweet_mensagem)
-
-        val mensagemDoTweet: String = campoDeMensagemDoTweet.text.toString()
-
-        val foto: String? = tweet_foto.tag as String?
-
-        val dono = usuarioViewModel.usuarioDaSessao().value!!
-        return Tweet(mensagemDoTweet, foto, dono)
     }
 
 
