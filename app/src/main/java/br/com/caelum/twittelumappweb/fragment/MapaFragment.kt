@@ -22,31 +22,15 @@ class MapaFragment : SupportMapFragment() {
 
             val tweets = viewModel.tweets().value
 
-//            tweets?.forEach { tweet ->
-//
-//
-//
-//
-//                val marcador = MarkerOptions()
-//
-//
-//                marcador.position(LatLng(tweet.latitude, tweet.longitude))
-//                marcador.title(tweet.mensagem)
-//
-//            }
+            tweets?.forEach { tweet ->
 
-            val gps = GPS(activity?.baseContext!!)
-            gps.fazBusca()
-            val (lat, lng) = gps.getCoordenadasAtuais()
+                val marcador = MarkerOptions()
 
-            val marcador = MarkerOptions()
-            val latLng = LatLng(lat, lng)
-            marcador.position(latLng)
-            marcador.title("oi")
-            googleMap.addMarker(marcador)
-
-            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 7F)
-            googleMap.moveCamera(cameraUpdate)
+                marcador.position(LatLng(tweet.latitude, tweet.longitude))
+                marcador.title(tweet.mensagem)
+                
+                googleMap.addMarker(marcador)
+            }
 
         }
     }
