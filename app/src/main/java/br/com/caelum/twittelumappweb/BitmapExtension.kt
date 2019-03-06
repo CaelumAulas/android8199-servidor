@@ -26,12 +26,7 @@ object Carregador {
 
         val bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.size)
 
-        val matrix = Matrix()
-        matrix.postRotate(90.0F)
-
-        return Bitmap.createBitmap(bitmap, 0, 0,
-                bitmap.width, bitmap.height,
-                matrix, true)
+        return bitmap
 
     }
 }

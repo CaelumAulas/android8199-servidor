@@ -19,7 +19,9 @@ class TweetRepository(private val webClient: TweetWebClient) {
 
     private fun sucessoPraInsercao() = { tweet: Tweet ->
         lista.postValue(lista.value?.let {tweets ->
-            tweets + tweet }) //inserindo o tweet na lista de tweets
+            val listAtualizada = tweets + tweet
+            listAtualizada.sortedByDescending { it.id }
+        }) //inserindo o tweet na lista de tweets do mais recente pro mais antigo
     }
 
     private fun sucessoPraBusca() = {tweets: List<Tweet> ->
